@@ -33,6 +33,10 @@ public class Jugador {
 	//es mayor
 	//se queda con las cartas
 	//tiene turno
+	public boolean tieneTurno() {
+		return true;
+	}
+	
 	//tiene x cantidad de cartas
 
 	public void agregarCarta(Carta c) {

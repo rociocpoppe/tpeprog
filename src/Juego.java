@@ -4,17 +4,33 @@ public class Juego {
 
 	private ArrayList<Mazo>mazos;
 	private ArrayList<Carta>cartas;
+	private Mazo mazo;
 	private Jugador jugador1;
 	private Jugador jugador2;
 	private int cantidadRondas;
 	
-	public Juego(ArrayList<Mazo> mazos, ArrayList<Carta> cartas, String jugador1, String jugador2, int cantidadRondas) {
+	public Juego(ArrayList<Mazo> mazos, ArrayList<Carta> cartas, Mazo mazo, String jugador1, String jugador2, int cantidadRondas) {
 		this.mazos =  new ArrayList<>();
 		this.cartas=new ArrayList<>();
+		this.mazo=new Mazo(cartas, "primer mazo", 10);
 		this.jugador1 =  new Jugador(jugador1);
 		this.jugador2 =  new Jugador(jugador2);
 		this.cantidadRondas = cantidadRondas;
 	}
+	
+	
+
+	public Mazo getMazo() {
+		return mazo;
+	}
+
+
+
+	public void setMazo(Mazo mazo) {
+		this.mazo = mazo;
+	}
+
+
 
 	public ArrayList<Mazo> getMazos() {
 		return new ArrayList<>(this.mazos);
@@ -56,7 +72,15 @@ public class Juego {
 		}
 		
 	}
+	public void asignarTurno() {
+		String turno="turno";
+		if(this.getGanador().equals(jugador1)) {
+			jugador1.tieneTurno();
+		}else {
+			jugador2.tieneTurno();
+		}
 		
+	}
 	
 	public void repatirCartas(Jugador jugador1, Jugador jugador2) {
 		int cantidadCartas=1;
@@ -68,8 +92,6 @@ public class Juego {
 			}
 			cantidadCartas++;
 		}
-		
-			this.borrarCartas();
 	}
 	
 	
@@ -77,15 +99,18 @@ public class Juego {
 		int jugada1;
 		int jugada2;
 		for (int i=0; i<cantidadRondas; i++) {
-			jugada1=jugador1.getAtributoRandom(carta);
-			jugada2=jugador2.getAtributoRandom(carta);
-			if(jugada1>jugada2) {
-				jugador1.agregarCarta(carta);
-				jugador2.borrarCartas(carta);
-			}else {
-				jugador2.agregarCarta(carta);
-				jugador1.borrarCartas(carta);
-			}
+			if((!(jugador1.getCantidadCartas()==0) || (!(jugador2.getCantidadCartas()==0)))){
+				jugada1=jugador1.getAtributoRandom(carta);
+				jugada2=jugador2.getAtributoRandom(carta);
+					if(jugada1>jugada2) {
+						jugador1.agregarCarta(carta);
+						jugador2.borrarCartas(carta);
+						//jugador1.asignarTurno();
+					}else {
+						jugador2.agregarCarta(carta);
+						jugador1.borrarCartas(carta);
+					}
+				}
 		}
 		Jugador ganador= getGanador();
 		if(ganador!=null) {
@@ -106,6 +131,10 @@ public class Juego {
 	
 	
 	
-	
+	// nos queda ver que pasa si tiene numeero impar de cartas
+	//revisar jugar
+	//proveer la funcionalidad que permita creacion de mazo
+	//como hacer que las cartas pasen al final del mazo si hay empate --> va en jugar
+	//visualizarlo en main
 	
 }
