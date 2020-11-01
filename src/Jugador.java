@@ -8,6 +8,12 @@ public class Jugador {
 
 	public Jugador(String nombre) {
 		this.nombre = nombre;
+		this.cartas=new ArrayList<Carta>();
+	}
+
+	public Jugador() {
+		this.nombre = nombre;
+		this.cartas=new ArrayList<Carta>();
 	}
 
 	public String getNombre() {
@@ -30,14 +36,17 @@ public class Jugador {
 		cartas.remove(carta);
 	}
 	
-	//es mayor
-	//se queda con las cartas
-	//tiene turno
 	public boolean tieneTurno() {
 		return true;
 	}
 	
-	//tiene x cantidad de cartas
+	//agrego
+	public boolean tieneCartas() {
+		if(cartas.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 
 	public void agregarCarta(Carta c) {
 		cartas.add(c);
@@ -54,17 +63,13 @@ public class Jugador {
 		return cartas.get(0);
 	}
 	
-	
-	public void getAtributoRandom(Carta carta) {
-		Carta [] cartaAtributos = new Carta[carta.getCantidadAtributos()];
-		Random rnd = new Random();
-		Carta atributoSeleccionado = cartaAtributos[rnd.nextInt(cartaAtributos.length) ];
-		
+	public Carta getCarta(int c) {
+		return cartas.get(c);
 	}
-	//ejemplo de: https://es.stackoverflow.com/questions/15827/random-y-arrays
-
+	
 	public int getCantidadCartas() {
 		return cartas.size();
 	}
+	
 	
 }

@@ -2,41 +2,61 @@
 public class Atributo extends Comparable {
 	
 	private String nombre;
-	private double valor;
+	private int valor;
+	private String pelea;
 	
-	public Atributo(String nombre, double valor) {
+	public Atributo(String nombre, int valor) {
 		this.nombre = nombre;
 		this.valor = valor;
+		this.pelea=pelea;
 	}
 	
+	public Atributo() {
+		this.nombre = nombre;
+		this.valor = valor;
+		this.pelea=pelea;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public double getValor() {
+	public int getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setValor(int valor) {
 		this.valor = valor;
 	}
-
-	public void compararAtributos() {
-		
-	}
+	
+	
 	
 	@Override
     public int compareTo(Atributo atrib) {
-		if(this.getValor() < atrib.getValor()){
-			return -10;
-		} else if (this.getValor() > atrib.getValor()) {
-			  return 10;
-		}else{
-			return 0;
-		}
+		return this.valor -atrib.getValor();
 				
 	}
+	
+	//agrego
+	public boolean ganaCompetencia(Atributo cartaAtrib2){
+		System.out.println("Se compite por: "+getNombre() +"atributo\n"+"Ronda: "+getPelea()+"\n");
+		if(getValor()>cartaAtrib2.getValor()){
+			return true;
+		}else if(getValor()<cartaAtrib2.getValor()){
+			return false;
+		}return false;					
+	}
+
+	
+	public String getPelea() {
+		return pelea;
+	}
+
+	public void setPelea(String pelea) {
+		this.pelea = pelea;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		try {
@@ -49,9 +69,8 @@ public class Atributo extends Comparable {
 
 	@Override
 	public String toString() {
-		return nombre+" "+valor;
+		return "Atributo [nombre=" + nombre + ", valor=" + valor + "]";
 	}
-
 	
 	
 
