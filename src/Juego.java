@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Juego {
 
-	private ArrayList<Mazo>mazos;
+	//private ArrayList<Mazo>mazos;
 	private ArrayList<Carta>cartas;
 	private Mazo mazo;
 	private Jugador jugador1;
@@ -11,7 +11,7 @@ public class Juego {
 	private ArrayList<String>anotador;
 	
 	public Juego() {
-		this.mazos =  new ArrayList<>();
+		//this.mazos =  new ArrayList<>();
 		this.cartas=new ArrayList<>();
 		this.mazo=new Mazo();
 		this.jugador1 = jugador1;
@@ -20,8 +20,8 @@ public class Juego {
 		this.anotador=new ArrayList<>();
 	}
 	
-	public Juego(ArrayList<Mazo> mazos, ArrayList<Carta> cartas, Mazo mazo, String jugador1, String jugador2, int cantidadRondas) {
-		this.mazos =  new ArrayList<>();
+	public Juego(/*ArrayList<Mazo> mazos,*/ ArrayList<Carta> cartas, Mazo mazo, String jugador1, String jugador2, int cantidadRondas) {
+		//this.mazos =  new ArrayList<>();
 		this.cartas=new ArrayList<>();
 		this.mazo=new Mazo();
 		this.jugador1 =  new Jugador(jugador1);
@@ -38,13 +38,13 @@ public class Juego {
 		this.mazo = mazo;
 	}
 
-	public ArrayList<Mazo> getMazos() {
+	/*public ArrayList<Mazo> getMazos() {
 		return new ArrayList<>(this.mazos);
 	}
 
 	public void setMazos(ArrayList<Mazo> mazos) {
 		this.mazos = mazos;
-	}
+	}*/
 
 
 	public Jugador getJugador1() {
@@ -61,6 +61,14 @@ public class Juego {
 
 	public void setJugador2(Jugador jugador2) {
 		this.jugador2 = jugador2;
+	}
+	
+	public ArrayList<Carta> getCartas() {
+		return new ArrayList <Carta> (this.cartas);
+	}
+
+	public void setCartas(ArrayList<Carta> cartas) {
+		this.cartas = cartas;
 	}
 
 	public int getCantidadRondas() {
@@ -91,18 +99,16 @@ public class Juego {
 	}
 	
 	public void repartirCartas(Jugador jugador1, Jugador jugador2) {
-		int cantidadCartas=1;
-		mazo.mezclar();
-		for(Carta c: cartas){
+		int cantidadCartas=mazo.getCantidad();
+		for(int i=0; i<cantidadCartas;i++){
 			if(cantidadCartas%2==0) {
-				jugador2.agregarCarta(c);
+				jugador2.agregarCarta(mazo.borrarPrimerCarta());;
 			}else {
-				jugador1.agregarCarta(c);
+				jugador1.agregarCarta(mazo.borrarPrimerCarta());
 			}
-			cantidadCartas++;
 		}
+		
 	}
-	
 	
 	public ArrayList<String> getAnotador() {
 		return new ArrayList<>(this.anotador);
@@ -115,52 +121,46 @@ public class Juego {
 	public void jugar() {
 		if(mazo.mazoCorrecto()) {
 			repartirCartas(jugador1, jugador2);
-			for (int i=0; i<cantidadRondas; i++) {
-				if((!(jugador1.tieneCartas()) || (!(jugador2.tieneCartas())))){
-					if(!(jugador1.tieneCartas())) {
-						anotador.add("Ganó el jugador " + jugador2.getNombre());
-					}else {
-						anotador.add("Ganó el jugador " + jugador1.getNombre());
-					}// no agrega las cartas al jugador 1
-					/*Carta carta1=jugador1.getCarta(0);
-					this.anotador.add("El jugador "+ jugador1.getNombre() + "juega con la carta: " + carta1);
-					Carta carta2=jugador2.getCarta(0);
-					this.anotador.add("El jugador "+ jugador2.getNombre() + "juega con la carta: " + carta2);
-					/*Atributo atributo1=carta1.getAtributoRandom();
-					Atributo atributo2=carta2.getAtributoRandom();
-					this.anotador.add("El jugador "+ jugador1.getNombre() + "juega con el atributo: " + carta1);
-					this.anotador.add("El jugador "+ jugador2.getNombre() + "juega con el atributo: " + carta2);
-					/*int comparar=carta1.compareTo(carta2);
-					if(comparar>0) {
-						System.out.println("Gana la ronda jugador " +jugador1.getNombre());
-					}else if (comparar<0) {
-						System.out.println("Gana la ronda jugador " +jugador2.getNombre());
-					}
-					else {
-						System.out.println("empate");
-					}
-					/*if(jugador1.getCarta(0).getAtributo(atributoACompetir1).getValor()>jugador2.getCarta(0).getAtributo(atributoAcompetir2).getValor()); 
-						jugador1.agregarCarta(cartas.get(i));
-						jugador2.borrarCartas(cartas.get(i));
-						asignarTurno();
-					}else if(jugador1.getCarta(0).getAtributo(atributoACompetir1).getValor()<jugador2.getCarta(0).getAtributo(atributoAcompetir2).getValor()) { 
-						jugador2.agregarCarta(cartas.get(i));
-						jugador1.borrarCartas(cartas.get(i));
-						asignarTurno();
-					}if (jugador1.getCarta(0).getAtributo(atributoACompetir1).getValor()==jugador2.getCarta(0).getAtributo(atributoAcompetir2).getValor()) { 
-						System.out.println("Empate");
-						mazo.addCartas(jugador1.getCarta(0));
-						mazo.addCartas(jugador2.getCarta(0));
-						asignarTurno();
-					}*/
+			if ((jugador1.tieneCartas()) || (jugador2.tieneCartas())){
+				if(!jugador1.tieneCartas()){
+					System.out.println(" -------------------------"+"\n"+" Termino el juego:El ganador es el jugador   "+ jugador1.getNombre());
+				}else if(!jugador2.tieneCartas()){
+					System.out.println( " -------------------------"+"\n"+" Termino el juego:El ganador es el jugador   "+ jugador2.getNombre());
+				}
+			} 
+			int ronda=1;
+			Carta carta1;
+			Carta carta2;
+			String empate;
+			String atributoAComparar=jugador1.getCarta(0).getAtributoRandom();
+			while (ronda<=this.cantidadRondas) {
+				System.out.print("---------------------------------"+"\n"+"Comienza Ronda "+ronda+"\n"+"---------------------------------"+"\n");
+				System.out.print("Cantidad de cartas jugador "+jugador1.getNombre()+" :"+jugador1.totalCartas() +"\n"+"Cantidad de cartas jugador "+jugador2.getNombre()+" :"+jugador2.totalCartas()+"\n");
+				carta1=jugador1.eliminarPrimerCarta();
+				carta2=jugador2.eliminarPrimerCarta();;
+				Atributo atributo1=carta1.getAtributo(atributoAComparar);
+				Atributo atributo2=carta2.getAtributo(atributoAComparar);
+				if(atributo1.compareTo(atributo2)>0) {
+					jugador1.agregarCarta(carta2);
+					jugador2.borrarCartas(carta2);
+					jugador1.tieneTurno();
+				}else if(atributo1.compareTo(atributo2)<0) {
+					jugador2.agregarCarta(carta1);
+					jugador1.borrarCartas(carta1);
+					jugador2.tieneTurno();
+				}else {
+					mazo.addCartas(carta1);
+					mazo.addCartas(carta2);
+					empate="Empate";
+				}
+				ronda++;
 			}
-			/*Jugador ganador= getGanador();
+			Jugador ganador= getGanador();
 			if(ganador!=null) {
 				System.out.println("Ganó el jugador " + ganador.getNombre());
-			}*/
-		}}
+			}
+		}
 	}
-	
 
 	public Jugador getGanador() {
 		if (jugador1.getCantidadCartas()>jugador2.getCantidadCartas()){

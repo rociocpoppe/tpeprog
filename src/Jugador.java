@@ -4,16 +4,16 @@ import java.util.Random;
 public class Jugador {
 
 	private String nombre;
-	private ArrayList<Carta>cartas;
+	private ArrayList<Carta>cartasJugador;
 
 	public Jugador(String nombre) {
 		this.nombre = nombre;
-		this.cartas=new ArrayList<Carta>();
+		this.cartasJugador=new ArrayList<Carta>();
 	}
 
 	public Jugador() {
 		this.nombre = nombre;
-		this.cartas=new ArrayList<Carta>();
+		this.cartasJugador=new ArrayList<Carta>();
 	}
 
 	public String getNombre() {
@@ -24,16 +24,12 @@ public class Jugador {
 		this.nombre = nombre;
 	}
 
-	public ArrayList<Carta> getCartas() {
-		return new ArrayList<>(this.cartas);
-	}
-
 	public void setCartas(ArrayList<Carta> cartas) {
-		this.cartas = cartas;
+		this.cartasJugador = cartas;
 	}
 	
 	public void borrarCartas(Carta carta) {
-		cartas.remove(carta);
+		cartasJugador.remove(carta);
 	}
 	
 	public boolean tieneTurno() {
@@ -42,34 +38,44 @@ public class Jugador {
 	
 	//agrego
 	public boolean tieneCartas() {
-		if(cartas.isEmpty()) {
+		if(cartasJugador.isEmpty()) {
 			return false;
 		}
 		return true;
 	}
 
 	public void agregarCarta(Carta c) {
-		cartas.add(c);
+		cartasJugador.add(c);
+		
+	}
+
+	
+	public Carta getPrimerCarta() {
+		return cartasJugador.get(0);
+	}
+	
+	public Carta getCarta(int i) {
+		Carta aux=new Carta(nombre);
+		for(Carta carta:cartasJugador) {
+			aux=cartasJugador.get(i);
+		}
+		return aux;
 		
 	}
 	
-	public void tomarPrimerCarta(Jugador jugador1) {
-		if(!cartas.isEmpty()) {
-			jugador1.getPrimerCarta();
-		}
+	public Carta eliminarPrimerCarta() {
+		return cartasJugador.remove(0);
 	}
-	
-	public Carta getPrimerCarta() {
-		return cartas.get(0);
-	}
-	
-	public Carta getCarta(int c) {
-		return cartas.get(c);
-	}
-	
 	public int getCantidadCartas() {
-		return cartas.size();
+		return cartasJugador.size();
 	}
-	
+	public int totalCartas() {
+		int i = 0;
+		for (Carta c : cartasJugador) {
+			i++;
+			}
+		return i;
+	}
+
 	
 }

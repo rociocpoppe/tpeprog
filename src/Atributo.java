@@ -1,5 +1,5 @@
 
-public class Atributo extends Comparable {
+public class Atributo implements Comparable {
 	
 	private String nombre;
 	private int valor;
@@ -31,22 +31,12 @@ public class Atributo extends Comparable {
 	}
 	
 	
-	
 	@Override
-    public int compareTo(Atributo atrib) {
-		return this.valor -atrib.getValor();
-				
+	public int compareTo(Atributo atributo) {
+		return this.getValor() - atributo.getValor();
 	}
 	
-	//agrego
-	public boolean ganaCompetencia(Atributo cartaAtrib2){
-		System.out.println("Se compite por: "+getNombre() +"atributo\n"+"Ronda: "+getPelea()+"\n");
-		if(getValor()>cartaAtrib2.getValor()){
-			return true;
-		}else if(getValor()<cartaAtrib2.getValor()){
-			return false;
-		}return false;					
-	}
+	
 
 	
 	public String getPelea() {
@@ -71,6 +61,7 @@ public class Atributo extends Comparable {
 	public String toString() {
 		return "Atributo [nombre=" + nombre + ", valor=" + valor + "]";
 	}
+
 	
 	
 

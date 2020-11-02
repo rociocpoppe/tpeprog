@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class Carta{
 
 	private String nombre;
@@ -15,7 +16,7 @@ public class Carta{
 	
 	
 	public Carta(String nombre) {
-		this.nombre = nombre.toUpperCase();
+		this.nombre = nombre;
 		this.cantidadAtributos = cantidadAtributos;
 		this.atributos = new ArrayList<Atributo>();
 	}
@@ -38,20 +39,26 @@ public class Carta{
 	}
 
 	public ArrayList<Atributo> getAtributos() {
-		return new ArrayList<>(this.atributos);
+		return new ArrayList<Atributo>(this.atributos);
 	}
 
 	public void setAtributos(ArrayList<Atributo> atributos) {
 		this.atributos = atributos;
 	}
 	
-	//agregue
+
 	public void addAtributo(Atributo atributo) {
 		atributos.add(atributo);
 	}
 	
-	public Atributo getAtributo(int c) {
-		return atributos.get(c);
+	public Atributo getAtributo(String nombre) {
+		Atributo retorno=new Atributo();
+		for(int i=0; i<atributos.size();i++) {
+			retorno=atributos.get(i);
+			if(retorno.equals(nombre)) {
+				return retorno;
+			}
+		}return null;
 	}
 
 
@@ -60,7 +67,7 @@ public class Carta{
 	}
 
 	
-	//agregué
+
 	@Override
 	public String toString() {
 		return "Carta [nombre=" + nombre + ", atributos=" + atributos + "]";
@@ -97,7 +104,7 @@ public class Carta{
 	 
 	public boolean verificarCartas (Carta carta) {
 		if(this.getCantidadAtributos()==carta.getCantidadAtributos()) {
-			for(int i=0; i<this.atributos.size();i++) {
+			for(int i=0; i<atributos.size();i++) {
 				Atributo atributo=this.atributos.get(i);
 				if(!carta.contieneAtributo(atributo)) {
 					return false;
@@ -106,22 +113,16 @@ public class Carta{
 			}
 		}return false;
 	}
-
-
+	
 	public String getAtributoRandom() {
-		Jugador jugador=new Jugador();
-		Carta aux = jugador.getPrimerCarta();
-		int atributos=aux.getCantidadAtributos();
-		Random rand = new Random();
-		return aux.getAtributo(rand.nextInt(atributos)).getNombre();
-		
+		int cantidadAtributos=atributos.size();
+		int retorno=0;
+		retorno=(int)Math.floor((Math.random()*cantidadAtributos));
+		return atributos.get(retorno).getNombre();
 	}
 	
-
-
 	
-									
-				
+	
 	
 				
 }

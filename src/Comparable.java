@@ -1,5 +1,5 @@
 
-public abstract class Comparable {
+public interface Comparable {
 
 	
 	public abstract int compareTo(Atributo atrib);

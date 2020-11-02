@@ -12,6 +12,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 
 
+
 public class Mazo {
 	
 	private ArrayList<Carta>cartas;
@@ -33,7 +34,7 @@ public class Mazo {
 
 
 	public ArrayList<Carta> getCartas() {
-		return new ArrayList<>(this.cartas);
+		return new ArrayList<Carta>(cartas);
 	}
 
 
@@ -53,7 +54,7 @@ public class Mazo {
 
 
 	public int getCantidad() {
-		return cantidad;
+		return cartas.size();
 	}
 
 
@@ -63,10 +64,7 @@ public class Mazo {
 	
 	//agregar cartas
 	public void addCartas(Carta carta) {
-		if(carta.verificarCartas(carta)) {
-			cartas.add(carta);	
-		}
-		
+		cartas.add(carta);		
 	}
 	
 	//borrar cartas
@@ -75,8 +73,8 @@ public class Mazo {
 	}
 	
 	
-	public Carta primerCarta() {
-		return cartas.get(0);
+	public Carta borrarPrimerCarta() {
+		return cartas.remove(0);
 	}
 	
 	
@@ -100,30 +98,6 @@ public class Mazo {
 	
 	}
 	
-	public void importMazo (String jsonFile) {
-        File jsonInputFile = new File(jsonFile);
-        InputStream is;
-        try {
-            is = new FileInputStream(jsonInputFile);
-            JsonReader reader = Json.createReader(is);
-            JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
-            for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
-            	Carta carta1 = new Carta(carta.getString("nombre"));
-            	JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
-                for (String nombreAtributo : atributos.keySet()) {
-                	
-                	Atributo atr = new Atributo(nombreAtributo, atributos.getInt(nombreAtributo));
-                	carta1.addAtributo(atr);
-                }
-                
-                this.addCartas(carta1);
-            }
-            reader.close();
-            
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-	}
 	
 	//agrego mezclar cartas
 	
@@ -132,15 +106,66 @@ public class Mazo {
 	}
 	
 	public boolean esImpar() {
-		if(this.getCantidad()/2==0) {
+		if(!(this.getCantidad()/2==0)) {
 			return true;
 		}return false;
 	}
+	public static void mostrarMazo(String jsonFile) {
+        //URL url = getClass().getResource(jsonFile);
+        File jsonInputFile = new File(jsonFile);
+        InputStream is;
+        try {
+            is = new FileInputStream(jsonInputFile);
+            // Creo el objeto JsonReader de Json.
+            JsonReader reader = Json.createReader(is);
+            // Obtenemos el JsonObject a partir del JsonReader.
+            JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
+            for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
+                String nombreCarta = carta.getString("nombre");
+                JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
+                String atributosStr = "";
+                for (String nombreAtributo:atributos.keySet())
+                    atributosStr = atributosStr + nombreAtributo + ": " +
+                            atributos.getInt(nombreAtributo) + "; ";
+                System.out.println(nombreCarta+"\t\t\t"+atributosStr);
+            }
 
-	public void add(Collection<? extends Carta> cartasMazo) {
-		cartas.addAll(cartasMazo);
-		
-	}
+            reader.close();
 
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
+	/*public void cargarMazo(String jsonFile) {
+    File jsonInputFile = new File(jsonFile);
+    InputStream is;
+    try {
+        is = new FileInputStream(jsonInputFile);
+        // Creo el objeto JsonReader de Json.
+        JsonReader reader = Json.createReader(is);
+        // Obtenemos el JsonObject a partir del JsonReader.
+        JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
+        for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
+            String nombreCarta = carta.getString("nombre");
+            Carta cartaNueva = new Carta(nombreCarta);
+            JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
+            String atributosStr = "";
+            for (String nombreAtributo:atributos.keySet()){
+            	int valorAtributo = atributos.getInt(nombreAtributo);
+            	Atributo nuevoAtributo = new Atributo(nombreAtributo, valorAtributo);
+            	cartaNueva.addAtributo(nuevoAtributo);
+            }
+            this.addCartas(cartaNueva);
+        }
+
+        reader.close();
+        
+    } catch (FileNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    
+	}*/
 }
