@@ -4,7 +4,7 @@ public class PocimaCocktail extends Pocima{
 
 	private ArrayList<Pocima>pocimas;
 	
-	public PocimaCocktail(String tipoPocima) {
+	public PocimaCocktail(String tipoPocima, ArrayList<Pocima>pocimas) {
 		super(tipoPocima);
 		this.pocimas=new ArrayList<Pocima>();
 	}

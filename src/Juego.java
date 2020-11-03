@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Juego {
 
-	//private ArrayList<Mazo>mazos;
+	
 	private ArrayList<Carta>cartas;
 	private Mazo mazo;
 	private Jugador jugador1;
@@ -11,7 +11,6 @@ public class Juego {
 	private ArrayList<String>anotador;
 	
 	public Juego() {
-		//this.mazos =  new ArrayList<>();
 		this.cartas=new ArrayList<>();
 		this.mazo=new Mazo();
 		this.jugador1 = jugador1;
@@ -20,8 +19,7 @@ public class Juego {
 		this.anotador=new ArrayList<>();
 	}
 	
-	public Juego(/*ArrayList<Mazo> mazos,*/ ArrayList<Carta> cartas, Mazo mazo, String jugador1, String jugador2, int cantidadRondas) {
-		//this.mazos =  new ArrayList<>();
+	public Juego(ArrayList<Carta> cartas, Mazo mazo, String jugador1, String jugador2, int cantidadRondas) {
 		this.cartas=new ArrayList<>();
 		this.mazo=new Mazo();
 		this.jugador1 =  new Jugador(jugador1);
@@ -37,14 +35,6 @@ public class Juego {
 	public void setMazo(Mazo mazo) {
 		this.mazo = mazo;
 	}
-
-	/*public ArrayList<Mazo> getMazos() {
-		return new ArrayList<>(this.mazos);
-	}
-
-	public void setMazos(ArrayList<Mazo> mazos) {
-		this.mazos = mazos;
-	}*/
 
 
 	public Jugador getJugador1() {
@@ -132,14 +122,17 @@ public class Juego {
 			Carta carta1;
 			Carta carta2;
 			String empate;
-			String atributoAComparar=jugador1.getCarta(0).getAtributoRandom();
+			String atributoAComparar1=jugador1.getAtributoRandom();
+			String atributoAComparar2=jugador2.getAtributoRandom();
 			while (ronda<=this.cantidadRondas) {
-				System.out.print("---------------------------------"+"\n"+"Comienza Ronda "+ronda+"\n"+"---------------------------------"+"\n");
-				System.out.print("Cantidad de cartas jugador "+jugador1.getNombre()+" :"+jugador1.totalCartas() +"\n"+"Cantidad de cartas jugador "+jugador2.getNombre()+" :"+jugador2.totalCartas()+"\n");
+				anotador.add("Comienza Ronda "+ronda);
+				anotador.add("Cantidad de cartas jugador "+jugador1.getNombre()+" :"+jugador1.totalCartas() +"\n"+"Cantidad de cartas jugador "+jugador2.getNombre()+" :"+jugador2.totalCartas()+"\n");
 				carta1=jugador1.eliminarPrimerCarta();
 				carta2=jugador2.eliminarPrimerCarta();;
-				Atributo atributo1=carta1.getAtributo(atributoAComparar);
-				Atributo atributo2=carta2.getAtributo(atributoAComparar);
+				Atributo atributo1=carta1.getAtributo(atributoAComparar1);
+				Atributo atributo2=carta2.getAtributo(atributoAComparar2);
+				anotador.add("El jugador "+jugador1.getNombre() + " compite con " + atributo1);
+				anotador.add("El jugador "+jugador2.getNombre() + " compite con " + atributo2);
 				if(atributo1.compareTo(atributo2)>0) {
 					jugador1.agregarCarta(carta2);
 					jugador2.borrarCartas(carta2);
@@ -157,7 +150,7 @@ public class Juego {
 			}
 			Jugador ganador= getGanador();
 			if(ganador!=null) {
-				System.out.println("Ganó el jugador " + ganador.getNombre());
+				anotador.add("Ganó el jugador " + ganador.getNombre());
 			}
 		}
 	}
@@ -172,6 +165,7 @@ public class Juego {
 			return null;
 		}
 	}
-	
+	 
+
 	
 }

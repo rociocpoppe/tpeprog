@@ -5,7 +5,7 @@ public class PocimaIncremental extends Pocima {
 	protected int valorIncremento;
 
 	
-	public PocimaIncremental(String tipoPocima) {
+	public PocimaIncremental(String tipoPocima, int valorIncremento) {
 		super(tipoPocima);
 		this.valorIncremento=valorIncremento;
 	}

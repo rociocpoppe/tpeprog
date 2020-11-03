@@ -36,7 +36,6 @@ public class Atributo implements Comparable {
 		return this.getValor() - atributo.getValor();
 	}
 	
-	
 
 	
 	public String getPelea() {

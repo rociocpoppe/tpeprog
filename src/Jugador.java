@@ -53,22 +53,24 @@ public class Jugador {
 	public Carta getPrimerCarta() {
 		return cartasJugador.get(0);
 	}
-	
-	public Carta getCarta(int i) {
-		Carta aux=new Carta(nombre);
-		for(Carta carta:cartasJugador) {
-			aux=cartasJugador.get(i);
-		}
-		return aux;
-		
-	}
+	 
 	
 	public Carta eliminarPrimerCarta() {
 		return cartasJugador.remove(0);
 	}
+	
 	public int getCantidadCartas() {
 		return cartasJugador.size();
 	}
+	
+	public String getAtributoRandom() {
+		Carta carta=cartasJugador.get(0);
+		ArrayList<Atributo>atributos=carta.getAtributos();
+		int retorno=(int) (Math.random() * atributos.size());
+		return atributos.get(retorno).getNombre();
+	}
+	
+
 	public int totalCartas() {
 		int i = 0;
 		for (Carta c : cartasJugador) {

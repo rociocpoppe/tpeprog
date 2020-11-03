@@ -16,6 +16,7 @@ import javax.json.JsonReader;
 public class Mazo {
 	
 	private ArrayList<Carta>cartas;
+	private ArrayList<Pocima>pocimas;
 	private String nombre;
 	private int cantidad;
 	
@@ -24,6 +25,7 @@ public class Mazo {
 		this.cartas = new ArrayList<>();
 		this.nombre = nombre;
 		this.cantidad = cantidad;
+		this.pocimas=new ArrayList<Pocima>();
 	}
 	
 	public Mazo() {
@@ -32,6 +34,14 @@ public class Mazo {
 		this.cantidad = cantidad;
 	}
 
+
+	public ArrayList<Pocima> getPocimas() {
+		return new ArrayList<Pocima>(this.pocimas);
+	}
+
+	public void addPocimas(Pocima pocima) {
+		pocimas.add(pocima);
+	}
 
 	public ArrayList<Carta> getCartas() {
 		return new ArrayList<Carta>(cartas);
@@ -138,34 +148,4 @@ public class Mazo {
         }
     }
 
-	/*public void cargarMazo(String jsonFile) {
-    File jsonInputFile = new File(jsonFile);
-    InputStream is;
-    try {
-        is = new FileInputStream(jsonInputFile);
-        // Creo el objeto JsonReader de Json.
-        JsonReader reader = Json.createReader(is);
-        // Obtenemos el JsonObject a partir del JsonReader.
-        JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
-        for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
-            String nombreCarta = carta.getString("nombre");
-            Carta cartaNueva = new Carta(nombreCarta);
-            JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
-            String atributosStr = "";
-            for (String nombreAtributo:atributos.keySet()){
-            	int valorAtributo = atributos.getInt(nombreAtributo);
-            	Atributo nuevoAtributo = new Atributo(nombreAtributo, valorAtributo);
-            	cartaNueva.addAtributo(nuevoAtributo);
-            }
-            this.addCartas(cartaNueva);
-        }
-
-        reader.close();
-        
-    } catch (FileNotFoundException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-    
-	}*/
 }

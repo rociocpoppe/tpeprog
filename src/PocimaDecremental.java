@@ -5,7 +5,7 @@ public class PocimaDecremental extends Pocima {
 	private int valorReduccion;
 	private ArrayList<Atributo>atributos;
 	
-	public PocimaDecremental(String tipoPocima) {
+	public PocimaDecremental(String tipoPocima, int valorReduccion) {
 		super(tipoPocima);
 		this.valorReduccion=valorReduccion;
 	}

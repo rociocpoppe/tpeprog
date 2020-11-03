@@ -7,11 +7,13 @@ public class Carta{
 	private String nombre;
 	private int cantidadAtributos;
 	private ArrayList<Atributo>atributos;
+	private Pocima pocima;
 	
 	public Carta(String nombre, int cantidadAtributos) {
 		this.nombre = nombre.toUpperCase();
 		this.cantidadAtributos = cantidadAtributos;
 		this.atributos = new ArrayList<Atributo>();
+		this.pocima= pocima;
 	}
 	
 	
@@ -120,6 +122,20 @@ public class Carta{
 		retorno=(int)Math.floor((Math.random()*cantidadAtributos));
 		return atributos.get(retorno).getNombre();
 	}
+
+	
+
+	public Pocima getPocima() {
+		return pocima;
+	}
+
+
+	public void setPocima(Pocima pocima) {
+		this.pocima = pocima;
+	}
+
+
+
 	
 	
 	

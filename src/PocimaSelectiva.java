@@ -1,10 +1,10 @@
 
-public class PocimaSelectiva extends PocimaIncremental {
+public class PocimaSelectiva extends PocimaIncremental{
 	
 	private Atributo atributoSeleccionado;
 
-	public PocimaSelectiva(String tipoPocima, Atributo atributoSeleccionado) {
-		super(tipoPocima);
+	public PocimaSelectiva(String tipoPocima,int valorIncremento) {
+		super(tipoPocima, valorIncremento);
 		this.atributoSeleccionado=new Atributo();
 		
 	}

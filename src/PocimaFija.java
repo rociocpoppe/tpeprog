@@ -3,7 +3,7 @@ public class PocimaFija extends Pocima {
 
 	private int valorFijo;
 	
-	public PocimaFija(String tipoPocima) {
+	public PocimaFija(String tipoPocima, int valorFijo) {
 		super(tipoPocima);
 		this.valorFijo=valorFijo;
 
