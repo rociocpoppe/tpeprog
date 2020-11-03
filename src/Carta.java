@@ -115,15 +115,7 @@ public class Carta{
 			}
 		}return false;
 	}
-	
-	public String getAtributoRandom() {
-		int cantidadAtributos=atributos.size();
-		int retorno=0;
-		retorno=(int)Math.floor((Math.random()*cantidadAtributos));
-		return atributos.get(retorno).getNombre();
-	}
-
-	
+		
 
 	public Pocima getPocima() {
 		return pocima;

@@ -5,6 +5,7 @@ public class Jugador {
 
 	private String nombre;
 	private ArrayList<Carta>cartasJugador;
+	private Estrategia estrategia;
 
 	public Jugador(String nombre) {
 		this.nombre = nombre;
@@ -22,6 +23,15 @@ public class Jugador {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+
+	public Estrategia getEstrategia() {
+		return estrategia;
+	}
+
+	public void setEstrategia(Estrategia estrategia) {
+		this.estrategia = estrategia;
 	}
 
 	public void setCartas(ArrayList<Carta> cartas) {

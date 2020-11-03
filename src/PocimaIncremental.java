@@ -9,6 +9,20 @@ public class PocimaIncremental extends Pocima {
 		super(tipoPocima);
 		this.valorIncremento=valorIncremento;
 	}
+	
+	
+
+	public int getValorIncremento() {
+		return valorIncremento;
+	}
+
+
+
+	public void setValorIncremento(int valorIncremento) {
+		this.valorIncremento = valorIncremento;
+	}
+
+
 
 	@Override
 	public int calcularPocimas(Atributo a) {
